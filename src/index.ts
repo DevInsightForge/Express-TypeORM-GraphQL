@@ -7,13 +7,15 @@ import express, { Request } from "express";
 import http from "http";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-import HelloResolver from "./modules/hello-world/resolver";
+import dataSource from "./configs/dataSource";
+import HelloResolver from "./modules/test/helloWorld";
 
 interface MyContext {
   req?: Request;
 }
 
 const main = async () => {
+  await dataSource.initialize();
   // Required logic for integrating with Express
   const app = express();
 

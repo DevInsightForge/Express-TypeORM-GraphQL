@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "rootDirs": ["src"],
-    "typeRoots": ["./src/types/*.d.ts"],
     "target": "Es2020",
     "module": "CommonJS",
     "types": ["node"],
     "lib": ["ES2020", "ESNext.AsyncIterable"],
     "outDir": "./dist",
-    "sourceMap": true,
+    "sourceMap": false,
     "moduleResolution": "node",
     "declaration": false,
 
@@ -25,9 +24,8 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "baseUrl": "."
+    "skipLibCheck": true
   },
-  "include": ["./src/**/*.ts", "./src/**/*d.ts", "./src/**/*.mts"],
+  "include": ["./src/**/*.ts", "./src/**/*d.ts"],
   "exclude": ["node_modules"]
 }
