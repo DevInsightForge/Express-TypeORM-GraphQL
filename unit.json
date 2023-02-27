@@ -1,0 +1,27 @@
+{
+  "listeners": {
+    "*:4000": {
+      "application": "express-server"
+    }
+  },
+
+  "applications": {
+    "express-server": {
+      "type": "external",
+      "working_directory": "/code/",
+      "executable": "/usr/bin/env",
+      "arguments": [
+        "node",
+        "--loader",
+        "unit-http/loader.mjs",
+        "--require",
+        "unit-http/loader",
+        "index.js"
+      ]
+    }
+  },
+  "access_log": {
+    "path": "/dev/stdout",
+    "format": "[$time_local] \"$request_line\" $status $body_bytes_sent \"$header_referer\""
+  }
+}

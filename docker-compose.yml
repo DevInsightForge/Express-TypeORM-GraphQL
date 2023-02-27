@@ -1,0 +1,20 @@
+version: "3.4"
+
+services:
+  node_graphql:
+    container_name: node_graphql
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    # env_file: .env
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
