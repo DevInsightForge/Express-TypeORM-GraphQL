@@ -3,6 +3,9 @@ import { DataSource } from "typeorm";
 
 const isProd = process.env.NODE_ENV === "production";
 
+const entitiesPath = path.resolve(__dirname, "../entities/*.*");
+const devDatabasePath = path.resolve(__dirname, "../../db.sqlite");
+
 const dataSource = new DataSource({
   type: "postgres",
   host: "postgres",
@@ -10,14 +13,14 @@ const dataSource = new DataSource({
   database: "postgres",
   username: "postgres",
   password: "postgres",
-  entities: [path.resolve(__dirname, "../entities/*.*")],
+  entities: [entitiesPath],
 });
 
 const devDataSource = new DataSource({
   type: "sqlite",
-  database: path.resolve(__dirname, "../../db.sqlite"),
+  database: devDatabasePath,
   synchronize: true,
-  entities: [path.resolve(__dirname, "../entities/*.*")],
+  entities: [entitiesPath],
 });
 
 const database = isProd ? dataSource : devDataSource;

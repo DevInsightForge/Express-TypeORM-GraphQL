@@ -4,7 +4,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import database from "./configs/database";
 import ApolloHandler from "./handlers/ApolloHandler";
 
-const main = async () => {
+const server = async () => {
   // spin up database
   await database.initialize();
 
@@ -16,4 +16,4 @@ const main = async () => {
   console.log(`🚀 Server ready at ${url}`);
 };
 
-main();
+server();
