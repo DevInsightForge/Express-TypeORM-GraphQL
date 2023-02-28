@@ -4,6 +4,7 @@ import { User } from "../entities/User";
 
 const isProd = process.env.NODE_ENV === "production";
 const devDatabasePath = path.resolve(__dirname, "../../db.sqlite");
+const testDatabasePath = path.resolve(__dirname, "../../testdb.sqlite");
 
 const entityModels = [User];
 
@@ -26,7 +27,7 @@ const devDataSource = new DataSource({
 
 export const testDataSource = new DataSource({
   type: "sqlite",
-  database: devDatabasePath,
+  database: testDatabasePath,
   synchronize: true,
   dropSchema: true,
   entities: entityModels,
