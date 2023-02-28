@@ -22,5 +22,5 @@ RUN yarn --frozen-lockfile --network-timeout 100000
 RUN yarn add global unit-http
 
 COPY --from=BUILDER /usr/app/dist ./
-RUN chmod a+x ./index.js
+RUN chmod a+x ./server.js
 COPY unit.json /var/lib/unit/conf.json

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "lib": ["ES2020", "ESNext.AsyncIterable"],
     "outDir": "./dist",
     "sourceMap": false,
@@ -28,6 +28,6 @@
   "ts-node": {
     "swc": true
   },
-  "include": ["./src/**/*.ts", "./src/**/*d.ts"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["node_modules"]
 }
