@@ -1,14 +1,15 @@
 import "reflect-metadata";
-import ExpressHandler from "./handlers/ExpressHandler";
+
+import { startStandaloneServer } from "@apollo/server/standalone";
+import ApolloHandler from "./handlers/ApolloHandler";
 
 const main = async () => {
-  const appServer = await ExpressHandler();
+  const apolloServer = await ApolloHandler();
+  // `startStandaloneServer` returns a `Promise` with the
+  // the URL that the server is listening on.
+  const { url } = await startStandaloneServer(apolloServer);
 
-  // Modified server startup
-  await new Promise<void>((resolve) =>
-    appServer.listen({ port: 4000 }, resolve)
-  );
-  console.log(`🚀 Server ready at http://localhost:4000/graphql/`);
+  console.log(`🚀 Server ready at ${url}`);
 };
 
 main();

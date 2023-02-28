@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "Es2020",
+    "target": "ESNext",
     "module": "CommonJS",
     "types": ["node"],
     "lib": ["ES2020", "ESNext.AsyncIterable"],

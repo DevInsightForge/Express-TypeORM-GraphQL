@@ -1,3 +1,4 @@
+import path from "path";
 import { DataSource } from "typeorm";
 
 const dataSource = new DataSource({
@@ -8,7 +9,7 @@ const dataSource = new DataSource({
   username: "postgres",
   password: "postgres",
   synchronize: true,
-  entities: [],
+  entities: [path.resolve(__dirname, "../entities/*.*")],
 });
 
 export default dataSource;
