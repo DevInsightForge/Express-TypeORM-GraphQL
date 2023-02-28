@@ -1,9 +1,8 @@
 import { DataSource } from "typeorm";
-import config from ".";
 
 const dataSource = new DataSource({
   type: "postgres",
-  host: config.isProd ? "postgres" : "localhost",
+  host: "postgres",
   port: 5432,
   database: "postgres",
   username: "postgres",

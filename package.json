@@ -1,12 +1,12 @@
 {
   "name": "graphql-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsnd --respawn -T --clear src/index.ts"
+    "start": "npm run build && node dist/server.js",
+    "dev": "tsnd --respawn -T --clear src/server.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.4.0",
