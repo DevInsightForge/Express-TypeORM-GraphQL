@@ -1,10 +1,11 @@
 import path from "path";
 import { DataSource } from "typeorm";
+import { User } from "../entities/User";
 
 const isProd = process.env.NODE_ENV === "production";
-
-const entitiesPath = path.resolve(__dirname, "../entities/*.*");
 const devDatabasePath = path.resolve(__dirname, "../../db.sqlite");
+
+const entityModels = [User];
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -13,14 +14,22 @@ const dataSource = new DataSource({
   database: "postgres",
   username: "postgres",
   password: "postgres",
-  entities: [entitiesPath],
+  entities: entityModels,
 });
 
 const devDataSource = new DataSource({
   type: "sqlite",
   database: devDatabasePath,
   synchronize: true,
-  entities: [entitiesPath],
+  entities: entityModels,
+});
+
+export const testDataSource = new DataSource({
+  type: "sqlite",
+  database: devDatabasePath,
+  synchronize: true,
+  dropSchema: true,
+  entities: entityModels,
 });
 
 const database = isProd ? dataSource : devDataSource;
