@@ -1,7 +1,7 @@
+import type { ApolloServer } from "@apollo/server";
+
 import { testDataSource } from "../../configs/database";
 import ApolloHandler from "../../handlers/ApolloHandler";
-
-import type { ApolloServer } from "@apollo/server";
 
 let apolloClient: ApolloServer;
 

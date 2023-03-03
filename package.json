@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "start": "npm run build && node dist/server.js",
     "dev": "tsnd --respawn -T --clear src/server.ts",
     "test": "jest",
