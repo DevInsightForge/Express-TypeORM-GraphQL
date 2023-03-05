@@ -11,7 +11,7 @@ COPY . ./
 RUN yarn build
 
 # Main service
-FROM nginx/unit:1.29.0-node18
+FROM nginx/unit:1.29.1-node18
 
 WORKDIR /code
 ENV NODE_ENV=production
@@ -19,7 +19,7 @@ ENV NODE_ENV=production
 COPY package.json ./
 COPY yarn.lock ./
 RUN yarn --frozen-lockfile --network-timeout 100000
-RUN yarn add global unit-http
+RUN yarn add unit-http@1.29.1
 
 COPY --from=BUILDER /usr/app/dist ./
 RUN chmod a+x ./server.js

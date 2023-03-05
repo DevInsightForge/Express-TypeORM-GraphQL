@@ -16,7 +16,7 @@
         "unit-http/loader.mjs",
         "--require",
         "unit-http/loader",
-        "index.js"
+        "server.js"
       ]
     }
   },

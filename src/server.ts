@@ -1,19 +1,22 @@
 import "reflect-metadata";
 
-import { startStandaloneServer } from "@apollo/server/standalone";
+import type { Server as HttpServer } from "http";
+
 import database from "./configs/database";
-import ApolloHandler from "./handlers/ApolloHandler";
+import ExpressHandler from "./handlers/ExpressHandler";
+
+const port = Boolean(process.env.PORT)
+  ? parseInt(process.env.PORT as string)
+  : 4000;
 
 const server = async () => {
   // spin up database
   await database.initialize();
+  const httpServer: HttpServer = await ExpressHandler();
 
-  const apolloServer = await ApolloHandler();
-  // `startStandaloneServer` returns a `Promise` with the
-  // the URL that the server is listening on.
-  const { url } = await startStandaloneServer(apolloServer);
+  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
-  console.log(`🚀 Server ready at ${url}`);
+  console.log(`Running server at http://localhost:${port}/`);
 };
 
 server();
