@@ -1,7 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { buildSchema } from "type-graphql";
 import HelloResolver from "../controllers/helloWorld/HelloResolver";
-import { RegisterResolver } from "../controllers/user/RegisterResolver";
+import { RegisterResolver } from "../controllers/user/Register/RegisterResolver";
+import validationErrorFormatter from "../utils/errorFormatter";
 
 const ApolloHandler = async () => {
   const schema = await buildSchema({
@@ -10,6 +11,7 @@ const ApolloHandler = async () => {
 
   return new ApolloServer({
     schema,
+    formatError: validationErrorFormatter,
   });
 };
 
