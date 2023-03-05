@@ -1,6 +1,6 @@
 import type { ApolloServer } from "@apollo/server";
 
-import { testDataSource } from "../../configs/database";
+import { testDatabase } from "../../configs/database";
 import ApolloHandler from "../../handlers/ApolloHandler";
 
 let apolloClient: ApolloServer;
@@ -13,12 +13,12 @@ const query = `
 
 describe("Hello World Test", () => {
   beforeAll(async () => {
-    await testDataSource.initialize();
+    await testDatabase.initialize();
     apolloClient = await ApolloHandler();
   });
 
   afterAll(async () => {
-    await testDataSource.destroy();
+    await testDatabase.destroy();
   });
 
   it("query is available", async () => {
