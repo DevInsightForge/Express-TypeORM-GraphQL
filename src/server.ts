@@ -16,7 +16,7 @@ const server = async () => {
 
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
 
-  console.log(`Running server at http://localhost:${port}/`);
+  console.log(`Running server at http://localhost:${port}/graphql`);
 };
 
 server();
