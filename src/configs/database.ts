@@ -22,7 +22,7 @@ const devDataSource = new DataSource({
   type: "sqlite",
   database: devDatabasePath,
   synchronize: true,
-  dropSchema: true,
+  // dropSchema: true,
   entities: entityModels,
 });
 
