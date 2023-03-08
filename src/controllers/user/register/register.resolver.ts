@@ -3,7 +3,7 @@ import { GraphQLError } from "graphql";
 import { Arg, Mutation, Resolver } from "type-graphql";
 
 import { User } from "../../../entities/User";
-import RegisterInput from "./RegisterInputs";
+import RegisterInput from "./register.inputs";
 
 @Resolver(User)
 export class RegisterResolver {

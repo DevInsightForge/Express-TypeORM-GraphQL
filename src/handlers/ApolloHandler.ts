@@ -1,7 +1,7 @@
 import { ApolloServer } from "@apollo/server";
 import { buildSchema } from "type-graphql";
 import HelloResolver from "../controllers/helloWorld/HelloResolver";
-import { RegisterResolver } from "../controllers/user/Register/RegisterResolver";
+import { RegisterResolver } from "../controllers/user/register/register.resolver";
 import validationErrorFormatter from "../utils/errorFormatter";
 
 const ApolloHandler = async () => {
