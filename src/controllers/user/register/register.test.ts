@@ -12,7 +12,7 @@ const query = `
 const variables = {
   input: {
     email: "user@test.com",
-    password: "TestUser@123",
+    password: "TestUser$123",
   },
 };
 

@@ -1,8 +1,8 @@
 import path from "path";
 import { DataSource } from "typeorm";
 import { User } from "../entities/User";
+import envConfigs from "./envConfigs";
 
-const isProd = process.env.NODE_ENV === "production";
 const devDatabasePath = path.resolve(__dirname, "../../db.sqlite");
 const testDatabasePath = path.resolve(__dirname, "../../testdb.sqlite");
 
@@ -34,6 +34,6 @@ export const testDataSource = new DataSource({
   entities: entityModels,
 });
 
-const database = isProd ? dataSource : devDataSource;
+const database = envConfigs.isProd ? dataSource : devDataSource;
 
 export default database;

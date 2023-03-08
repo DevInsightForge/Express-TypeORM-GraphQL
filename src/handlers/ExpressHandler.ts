@@ -4,9 +4,11 @@ import type { Server as HttpServer } from "http";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { json } from "body-parser";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import { createServer } from "http";
+import envConfigs from "../configs/envConfigs";
 import ApolloHandler from "./ApolloHandler";
 
 const ExpressHandler = async () => {
@@ -23,10 +25,17 @@ const ExpressHandler = async () => {
 
   app.use(
     "/graphql",
-    cors<cors.CorsRequest>(),
+    cors({
+      credentials: true,
+      origin: true,
+    }),
     json({ limit: "50mb" }),
+    cookieParser(envConfigs.secret as string),
     expressMiddleware(apolloServer, {
-      context: async ({ req, res }) => ({ req, res }),
+      context: async ({ req, res }): Promise<MyContext> => ({
+        req,
+        res,
+      }),
     })
   );
 

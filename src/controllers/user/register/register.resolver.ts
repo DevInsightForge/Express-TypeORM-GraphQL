@@ -1,16 +1,19 @@
 import * as bcrypt from "bcryptjs";
 import { GraphQLError } from "graphql";
-import { Arg, Mutation, Resolver } from "type-graphql";
+import * as jwt from "jsonwebtoken";
+import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
+import envConfigs from "../../../configs/envConfigs";
 
 import { User } from "../../../entities/User";
 import RegisterInput from "./register.inputs";
 
 @Resolver(User)
 export class RegisterResolver {
-  @Mutation(() => User)
+  @Mutation(() => User, { nullable: true })
   async register(
     @Arg("input")
-    { email, password }: RegisterInput
+    { email, password }: RegisterInput,
+    @Ctx() ctx: MyContext
   ): Promise<User> {
     try {
       const hashedPassword = await bcrypt.hash(password, 12);
@@ -19,6 +22,29 @@ export class RegisterResolver {
         email,
         password: hashedPassword,
       }).save();
+
+      const accessExpires = 1 * 1 * 60 * 60; // Expires:  d * h * m * s
+      // const refrshExpires = Math.floor(Date.now() / 1000) + 12 * (60 * 60); // Expires: Now + 12h
+
+      const accessToken = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+        },
+        envConfigs.secret as string,
+        {
+          expiresIn: accessExpires,
+        }
+      );
+
+      ctx.res?.cookie("__a_t", accessToken, {
+        maxAge: accessExpires * 1000,
+        path: "/graphql",
+        httpOnly: true,
+
+        secure: envConfigs.isProd as boolean,
+        // sameSite: "none",
+      });
 
       return user;
     } catch (error) {
