@@ -1,5 +1,6 @@
 declare interface MyContext {
   req?: Request;
   res?: Response;
-  user?: User | undefined;
+  userId?: string | undefined;
+  userRole?: string | undefined;
 }

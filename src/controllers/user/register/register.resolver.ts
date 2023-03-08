@@ -1,6 +1,6 @@
-import * as bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { GraphQLError } from "graphql";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import envConfigs from "../../../configs/envConfigs";
 
@@ -29,7 +29,7 @@ export class RegisterResolver {
       const accessToken = jwt.sign(
         {
           id: user.id,
-          email: user.email,
+          role: user.role,
         },
         envConfigs.secret as string,
         {
@@ -41,9 +41,8 @@ export class RegisterResolver {
         maxAge: accessExpires * 1000,
         path: "/graphql",
         httpOnly: true,
-
         secure: envConfigs.isProd as boolean,
-        // sameSite: "none",
+        sameSite: "none",
       });
 
       return user;
