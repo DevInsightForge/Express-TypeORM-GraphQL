@@ -1,4 +1,4 @@
-import { testDataSource } from "../../../configs/database";
+import testDatabase from "../../../dataconfigs/testDatabase";
 
 const query = `
   mutation Mutation($input: RegisterInput!) {
@@ -18,11 +18,11 @@ const variables = {
 
 describe("User Register Test", () => {
   beforeAll(async () => {
-    await testDataSource.initialize();
+    await testDatabase.initialize();
   });
 
   afterAll(async () => {
-    await testDataSource.destroy();
+    await testDatabase.destroy();
   });
 
   it("mutation has returned with a new user id", async () => {

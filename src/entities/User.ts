@@ -4,8 +4,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { RefreshToken } from "./RefreshToken";
 
 export enum UserRole {
   superadmin = "superadmin",
@@ -43,6 +45,12 @@ export class User extends BaseEntity {
   @Field()
   @Column({ name: "is_active", default: true })
   isActive: boolean;
+
+  @Field(() => [RefreshToken], { nullable: true })
+  @OneToMany(() => RefreshToken, (token) => token.user, {
+    eager: true,
+  })
+  sessions: RefreshToken[];
 
   @Field(() => UserRole)
   @Column({ default: UserRole.user })

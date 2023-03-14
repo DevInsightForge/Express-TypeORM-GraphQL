@@ -1,13 +1,9 @@
-import { Authorized, Ctx, Query, Resolver } from "type-graphql";
-import { UserRole } from "../../entities/User";
+import { Query, Resolver } from "type-graphql";
 
 @Resolver()
 class HelloResolver {
   @Query(() => String)
-  @Authorized(UserRole.user)
-  async helloWorld(@Ctx() ctx: MyContext) {
-    console.log(ctx?.userId, ctx?.userRole);
-
+  async helloWorld() {
     return "Hello World!";
   }
 }

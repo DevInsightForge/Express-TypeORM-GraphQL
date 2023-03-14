@@ -2,8 +2,8 @@ import "reflect-metadata";
 
 import type { Server as HttpServer } from "http";
 
-import database from "./configs/database";
 import envConfigs from "./configs/envConfigs";
+import database from "./dataconfigs/database";
 import ExpressHandler from "./handlers/ExpressHandler";
 
 const server = async () => {

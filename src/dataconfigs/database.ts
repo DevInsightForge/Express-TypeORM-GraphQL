@@ -1,12 +1,12 @@
 import path from "path";
 import { DataSource } from "typeorm";
+import envConfigs from "../configs/envConfigs";
+import { RefreshToken } from "../entities/RefreshToken";
 import { User } from "../entities/User";
-import envConfigs from "./envConfigs";
 
 const devDatabasePath = path.resolve(__dirname, "../../db.sqlite");
-const testDatabasePath = path.resolve(__dirname, "../../testdb.sqlite");
 
-const entityModels = [User];
+export const entityModels = [User, RefreshToken];
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -23,14 +23,6 @@ const devDataSource = new DataSource({
   database: devDatabasePath,
   synchronize: true,
   // dropSchema: true,
-  entities: entityModels,
-});
-
-export const testDataSource = new DataSource({
-  type: "sqlite",
-  database: testDatabasePath,
-  synchronize: true,
-  dropSchema: true,
   entities: entityModels,
 });
 
